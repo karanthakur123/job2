@@ -12,7 +12,6 @@
 	<artifactId>jobportalFinall</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jobportalFinall</name>
-	<sourceDirectory>src</sourceDirectory>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
