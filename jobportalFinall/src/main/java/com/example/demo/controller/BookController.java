@@ -136,7 +136,7 @@ public class BookController {
 	public List<JobDetails>  jobDetails(@PathVariable("username") String username)
 	{   
 		System.out.println("COming in job Details"+username.substring(1,username.length()-1));
-		 return jobDetailsRepository.findByUsername(username.substring(1,username.length()-1));
+		 return jobDetailsRepository.findByUsername(username);
 	}
 	
 	
@@ -262,27 +262,27 @@ public class BookController {
 	@PostMapping("/postHttpRequest")
 	public static String abc1(@RequestBody HashMap<String,String> tokenValue) throws IOException {
 		
-       String token,client_id,message;
-		token=tokenValue.get("token");
-		
-		client_id=tokenValue.get("client_id");
+       String message;
+//		token=tokenValue.get("token");
+//		
+//		client_id=tokenValue.get("client_id");
 		message=tokenValue.get("message");
-      String data= tokenValue.get("message");
-        String[] arrOfStr = data.split("--", 3);
-        String newlineusinglinesep = System.lineSeparator();
-        System.out.println(arrOfStr);
-       
-        String data1=arrOfStr[2]+ newlineusinglinesep + arrOfStr[1] + newlineusinglinesep + arrOfStr[0];
-       var url="https://graph.facebook.com/"+client_id+"/feed?message="+arrOfStr[2].substring(0,arrOfStr[2].length()-2) + newlineusinglinesep + arrOfStr[1] + newlineusinglinesep + arrOfStr[0].substring(1,arrOfStr[0].length()-1) +"&access_token="+token;
-       String url2 = url.replace("\n", "%0A");
-       String url3=url2.replace(" ", "%20");
-       String url4 = url3.replace("##", "%0A");
+//      String data= tokenValue.get("message");
+//        String[] arrOfStr = data.split("--", 3);
+//        String newlineusinglinesep = System.lineSeparator();
+//        System.out.println(arrOfStr);
+//       
+//        String data1=arrOfStr[2]+ newlineusinglinesep + arrOfStr[1] + newlineusinglinesep + arrOfStr[0];
+       var url="https://graph.facebook.com/v14.0/103335671387134/feed?message="+message+"&access_token=EAAFuKb1ZB71ABAMJ7LmW8GFNz7lqgqHs3emg5RpOjtEOZAbZBXLjKe7LagOFnSZCHs7n5v38lLw4RMZA5gd3hMa5B6b6jftQC1ysftD4EZBilVdZAW8qAZCB1bAcGOf22kbZC7xMcHUlUdTLRhoAfpYMtnIirCdudAQH1Sq6WQlyXpsRVXVZCCVZB1oGcOZCiHHIdyU5rODVSq9KBAZDZD";
+//       String url2 = url.replace("\n", "%0A");
+//       String url3=url2.replace(" ", "%20");
+//       String url4 = url3.replace("##", "%0A");
        var urlParameters = "";
         byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
 
         try {
 
-            var myurl = new URL(url4);
+            var myurl = new URL(url);
             con = (HttpURLConnection) myurl.openConnection();
 
             con.setDoOutput(true);
@@ -331,7 +331,7 @@ public class BookController {
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create("https://api.linkedin.com/v2/ugcPosts"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBodyy))
-                    .setHeader("Authorization", "Bearer AQV9mEf-HOe0nyRDqHm1Y3Pbz5Rcwp8gEvOr0wAkqgPjXoiuCRM9chbkR2G6FXkWSP1FiXs7U1pN_-uP3wLSB96VlhCT3AukYuHZjd-WZZvC7pHBVRftRGyB_Rwd18Y5TJNf1DEU69fOGcdBaR7XhBKi-os4sYDd-eo-hWvydwXcljylrOtqnbNSvoaSExkPVOIO5umDkVEkQrcCmUxMaQEUehDR0utsdq5BESABGGZ5GJPQNfqqNagvHswios4P_cm1nCdl2DU33_QdyNEvUgc_2QW7tFCRNdrvLmowTU3rFpFODuGEj5nYNVabPCvkV7j2bsVM5u-AX1piFyNzCVZRpLLKTQ")
+                    .setHeader("Authorization", "Bearer AQVnujZ96OTMZHWE2e5bZxbZ2Q-WBJOg5zS-TakXThL7kTo-tvFKY-3jiybvgSza0ED-gv6qQWW5z3FQHKr6gCU9hG_NmJq4GqC6ay_uz-h0NBdnPKL8X2C9tal8tcteNkmvAU7UVAYRAuQAis37TqKJgRMihEotwO4GNjIDhGQBZkL7gIg4msqpWbvHB1IrOtywOIX9Z7iWS-cTe4MijT2IQAxyUchhwn8hrKIVEQoM10sX3nfvdgvdTLjNM2H_D0zCJ-Vt6lYBcvz8yKx383kA8CMQkx4xGE7_K-68qHEth7xKLR0RKgeXYyrtiA93SYayHk5UcDY8WkHN-YrWkyDGC5R4Ow")
                     .build();
 
             HttpResponse<String> response=null;
